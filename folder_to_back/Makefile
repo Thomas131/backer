@@ -14,7 +14,8 @@ unlock:
 	rm -f .lock
 
 delete_old_back:
-	rm -rf _delete.*
+	-rm -rf _delete.* 1> /dev/null 2>&1 #ignore errors on removing files without write permissions ... If there are some, the next line is will apply and it will be removed there ...; TODO: Make it more beautiful, maybe something like " && exit 0;" (this didn't work ;( )
+	if ls _delete.** 1> /dev/null 2>&1; then chmod -R +w _delete.*; rm -rf _delete.*; fi #If there are files with no write permissions ... allow it to be able to delete ...
 
 include sync.mk
 
