@@ -1,7 +1,7 @@
 Backer:
 =======
 This is my personal Backup-System based on Makefiles (This will maybe change in the future). It is highly inspired by rsnapshot. My goals were:
-* flexible (all changes should be made in sync.mk, but if really neccecary, they can be made in the Makefile itself, too.
+* flexible (all changes should be made in sync.mk, but if really neccecary, they can be made in the Makefile itself, too)
 * consistend (independing of the backup-command behind the scenes, the Make-Commands are the same)
 * easy (to use and from concept; all the magic is normally done in rsync)
 * fast&space-saving (Only new and modified files are synced and saved twice; thanks to hardlinking and the rsync-check algorithm)
@@ -17,7 +17,7 @@ I copy this repo for every Device I want to backup. Then I copy the folder folde
 rsync-Flags (from the example):
 ===============================
 * -a: archive-Mode ... a lot of options combined
-* -D: Skip device-files and special files
+* --no-specials --no-devices: Skip device-files and special files
 * --delete: Delete files from the old Backups if deleted from the backed folder
 * --numeric-ids: Save nummeric Owner-IDs, even though the matching user doesn't exist on the destination device
 * --delete-excluded: Delete files on the backup-folder, if they already exist there and are excluded by the exclude-command
@@ -44,7 +44,7 @@ The rsync-Daemon was chosen because:
 
 It also has some downsides:
 * The files are not encrypted and I am unsure of the quality of the authentification. Only the backer should be allowed to access the files. (The Request-IPs can be restricted but that is no big obstacle if the hacker in controll of the network)
-* rsync as daemon isn't used as widely as ssh and there are maybe unknown security flaws (although 
+* rsync as daemon isn't used as widely as ssh and there are maybe unknown security flaws (although the NSA seems to have ways to get ssh-access, too ;( )
 
 TODO:
 =====
